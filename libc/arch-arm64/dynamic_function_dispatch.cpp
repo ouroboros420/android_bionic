@@ -62,6 +62,8 @@ DEFINE_IFUNC_FOR(memmove) {
         RETURN_FUNC(memmove_func, __memmove_aarch64_simd);
     } else {
         RETURN_FUNC(memmove_func, __memmove_aarch64);
+    }
+}
 
 typedef int stpcpy_func(char*, const char*);
 DEFINE_IFUNC_FOR(stpcpy) {
@@ -112,6 +114,12 @@ typedef int strncmp_func(const char*, const char*, int);
 DEFINE_IFUNC_FOR(strncmp) {
     // TODO: enable the SVE version.
     RETURN_FUNC(strncmp_func, __strncmp_aarch64);
+}
+
+typedef size_t strnlen_func(const char*);
+DEFINE_IFUNC_FOR(strnlen) {
+    // TODO: enable the SVE version.
+    RETURN_FUNC(strnlen_func, __strnlen_aarch64);
 }
 
 typedef char* strrchr_func(const char*, int);
